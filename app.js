@@ -15,6 +15,8 @@ const dotenv = require("dotenv");
 
 dotenv.config();
 
+const PORT = process.env.PORT || 8080;
+
 main()
 .then(()=>{
     console.log("connected to db");
@@ -24,6 +26,7 @@ main()
 });
 
 async function main(){ 
+    console.log("MONGO_URI:", process.env.MONGO_URI);
     await mongoose.connect(process.env.MONGO_URI)
 }
 
@@ -155,6 +158,6 @@ app.use((err,req,res,next)=>{
     res.render("error.ejs", {message, statusCode});
 });
 
-app.listen(8080, () => {
-    console.log("listening to the port 8080");
+app.listen(PORT, () => {
+    console.log(`Listening on port ${PORT}`);
 });
